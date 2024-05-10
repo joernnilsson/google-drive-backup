@@ -9,4 +9,4 @@ RUN mkdir -p /backup /config
 COPY src /app
 WORKDIR /app
 
-CMD ["/usr/local/bin/python3", "main.py", "--config-file", "/config/config.yaml", "--google-drive-credentials-file", "/config/service_account.json", "--schedule", "--run-now"]
+CMD ["/usr/local/bin/python3", "main.py", "--config-file", "/config/config.yaml", "--google-drive-credentials-file", "/config/service_account.json", "--schedule"]

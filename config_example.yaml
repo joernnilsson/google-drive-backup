@@ -1,0 +1,7 @@
+name: "Example site"
+schedule: "00:00"
+google_drvie_folder: "_________"
+webhook: "_______"
+items:
+ - item1
+ - /path/to/item2
