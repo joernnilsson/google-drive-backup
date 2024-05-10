@@ -41,11 +41,8 @@ def wrapped_job(config, opts):
         print(f"main > job failed with message: {str(e)}")
 
     # Call webhook
-    print(payload)
     response = requests.post(config["webhook"], json=payload)
     print(f"main > webhook responded with: {response.status_code}")
-    import curl
-    curl.parse(response)
 
 def main():
     parser = argparse.ArgumentParser(description='Create backup and upload to Google Drive')
