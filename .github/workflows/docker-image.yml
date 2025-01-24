@@ -2,7 +2,7 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "cross_platform" ]
   pull_request:
     branches: [ "master" ]
 
@@ -20,6 +20,10 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
+      
+      # Add support for more platforms with QEMU
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
 
       - name: Create timestamp
         run: |
@@ -32,9 +36,6 @@ jobs:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag google-drive-backup:latest
 
       - name: Extract branch name
         shell: bash
@@ -52,9 +53,15 @@ jobs:
           labels: |
             org.opencontainers.image.title=${{ env.IMAGE_NAME }}
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          install: true
+          driver: docker-container
+
       - uses: docker/build-push-action@v5.3.0
         with:
-
+          platforms: linux/amd64,linux/arm64/v8
           file: Dockerfile
           context: .
           push: true
