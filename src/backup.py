@@ -3,10 +3,11 @@ import zipfile
 from datetime import datetime
 import argparse
 
-def make_zip_filename(output_directory):
+def make_zip_filename(output_directory, timestamp, is_generational):
     # Generate a timestamp
-    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    zip_filename = f"backup_{timestamp}.zip"
+    timestamp_str = timestamp.strftime("%Y%m%d-%H%M%S")
+    postfix = "_generational" if is_generational else f""
+    zip_filename = f"backup_{timestamp_str}{postfix}.zip"
     zip_filepath = os.path.join(output_directory, zip_filename)
     return zip_filepath
 

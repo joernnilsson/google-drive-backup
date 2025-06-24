@@ -1,5 +1,7 @@
 name: "Example site"
 schedule: "00:00"
+max_keep_daily_backups: 10
+max_keep_generational_backups: 10
 google_drvie_folder: "_________"
 webhook: "_______"
 items:
