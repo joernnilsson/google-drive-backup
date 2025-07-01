@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
+# Google Drive Backup Service Installer/Updater
+# ===========================================
+# This script can be used to:
+#   - Perform initial installation of the Google Drive backup service
+#   - Update the service to a newer version
+#
+# The script will:
+#   1. Pull the latest Docker image from GitHub Container Registry
+#   2. Stop and remove any existing container
+#   3. Start a new container with the updated image
+#   4. Mount the necessary volumes (backup items, config files)
+#   5. Configure automatic restart unless manually stopped
+#
+# Prerequisites:
+#   - Docker must be installed and running
+#   - config.yaml must be properly configured
+#   - service_account.json must be present and valid
+#   - Backup items specified in config.yaml must exist
+
 set -x
 set -e
 
